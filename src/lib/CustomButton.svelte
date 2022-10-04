@@ -2,18 +2,26 @@
   export let text;
   export let btnType = "";
   export let btnStyle = "primary";
+  export let btnSize = "";
+  export let btnIsDisabled = false;
 </script>
 
-<button class={btnStyle} type={btnType} on:click>
-  {text}
-</button>
+{#if btnIsDisabled}
+  <button class="{btnStyle} {btnSize}" type={btnType} disabled on:click>
+    {text}
+  </button>
+{:else}
+  <button class="{btnStyle} {btnSize}" type={btnType} on:click>
+    {text}
+  </button>
+{/if}
 
 <style>
   button {
     border-radius: 8px;
     border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
@@ -30,6 +38,10 @@
 
   button.secondary {
     background-color: #1a1a1a;
+  }
+
+  button.small {
+    font-size: 0.7rem;
   }
 
   @media (prefers-color-scheme: light) {

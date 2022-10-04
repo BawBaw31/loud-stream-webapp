@@ -39,6 +39,9 @@ h1 {
 
 .card {
   padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #app {
@@ -51,6 +54,41 @@ h1 {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 25rem;
+}
+
+form button {
+ width: 100%;
+}
+
+.input-container {
+  /* min-width: 22rem; */
+  min-width: 20rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  font-size: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+small {
+  color: red;
 }
 
 @media (prefers-color-scheme: light) {
