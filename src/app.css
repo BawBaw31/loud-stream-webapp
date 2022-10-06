@@ -52,9 +52,9 @@ h1 {
   align-items: center;
 }
 
-#app {
+/* #app {
   text-align: center;
-}
+} */
 
 button:focus,
 button:focus-visible {
@@ -91,6 +91,7 @@ input[type="email"] {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
+  margin-left: 0.5rem;
 }
 
 small {
