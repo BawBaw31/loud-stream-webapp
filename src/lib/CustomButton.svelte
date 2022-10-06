@@ -33,24 +33,25 @@
   }
 
   button.primary {
-    background-color: #5e0f4b;
+    background-color: var(--primary);
   }
 
   button.secondary {
-    background-color: #1a1a1a;
+    background-color: var(--secondary-dark);
   }
 
   button.small {
     font-size: 0.7rem;
   }
 
-  @media (prefers-color-scheme: light) {
-    button.primary {
-      background-color: #f17dd4;
-    }
+  button:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
 
+  @media (prefers-color-scheme: light) {
     button.secondary {
-      background-color: #f9f9f9;
+      background-color: var(--secondary-light);
     }
   }
 </style>
