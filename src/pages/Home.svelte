@@ -10,38 +10,32 @@
   };
 </script>
 
-<main>
-  <div class="pageContainer">
-    <div class="leftContainer" />
-    <div class="rightContainer">
-      <h1>Welcome to Loud-Stream webapp</h1>
+<div class="pageContainer">
+  <div class="leftContainer" />
+  <div class="rightContainer">
+    <h1>Welcome to Loud-Stream webapp</h1>
 
-      <div class="card">
-        <div class="card-header-container">
-          <h2>{login ? "Login" : "Register"}</h2>
-          <CustomButton
-            on:click={toggleLogin}
-            btnStyle="secondary"
-            btnType="submit"
-            btnSize="small"
-            text={login ? "Register" : "Login"}
-          />
-        </div>
-        {#if login}
-          <LoginForm />
-        {:else}
-          <RegisterForm />
-        {/if}
+    <div class="card">
+      <div class="card-header-container">
+        <h2>{login ? "Login" : "Register"}</h2>
+        <CustomButton
+          on:click={toggleLogin}
+          btnStyle="secondary"
+          btnType="submit"
+          btnSize="small"
+          text={login ? "Register" : "Login"}
+        />
       </div>
+      {#if login}
+        <LoginForm />
+      {:else}
+        <RegisterForm />
+      {/if}
     </div>
   </div>
-</main>
+</div>
 
 <style>
-  main {
-    height: 100%;
-  }
-
   .pageContainer {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -57,6 +51,7 @@
 
   .leftContainer {
     background-color: var(--primary);
+    min-height: 100%;
     height: 100vh;
   }
 
@@ -71,5 +66,21 @@
 
   h2 {
     margin-right: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .leftContainer {
+      display: none;
+    }
+    .rightContainer {
+      align-items: center;
+      max-width: 30rem;
+    }
+
+    .pageContainer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 </style>

@@ -4,10 +4,10 @@
   import NotFound from "./pages/NotFound.svelte";
 </script>
 
-<body>
+<main>
   {#if $currentArtist != null}
     <NotFound />
   {:else}
     <Home />
   {/if}
-</body>
+</main>
