@@ -1,8 +1,13 @@
 <script>
-  import Router from 'svelte-spa-router'
-  import { routes } from './routes';
+  import { currentArtist } from "./store/auth";
+  import Home from "./pages/Home.svelte";
+  import NotFound from "./pages/NotFound.svelte";
 </script>
 
 <body>
-  <Router {routes} />
+  {#if $currentArtist != null}
+    <NotFound />
+  {:else}
+    <Home />
+  {/if}
 </body>

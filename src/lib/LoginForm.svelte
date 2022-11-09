@@ -1,9 +1,8 @@
 <script lang="ts">
-  import CustomButton from "./CustomButton.svelte";
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
-  import { currentArtist } from "../stores";
-  import { get } from "svelte/store";
+  import { currentArtist } from "../store/auth";
+  import CustomButton from "./CustomButton.svelte";
 
   const loginRequest = async (
     email: string,
@@ -73,9 +72,9 @@
     btnIsDisabled={!$isValid}
   />
 
-  <CustomButton 
-    text="artist" 
-    on:click={() => (currentArtist.subscribe(value => console.log(value)))}
+  <CustomButton
+    text="artist"
+    on:click={() => currentArtist.subscribe((value) => console.log(value))}
   />
 </form>
 
