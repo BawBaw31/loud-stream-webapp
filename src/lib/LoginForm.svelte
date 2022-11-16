@@ -3,6 +3,9 @@
   import * as yup from "yup";
   import { currentArtist } from "../store/auth";
   import CustomButton from "./CustomButton.svelte";
+  import { useNavigate } from "svelte-navigator";
+
+  const navigate = useNavigate();
 
   const loginRequest = async (
     email: string,
@@ -45,6 +48,7 @@
           email: data.user.email,
           stage_name: data.user.stage_name,
         });
+        navigate("/", { replace: true });
       },
     });
 </script>

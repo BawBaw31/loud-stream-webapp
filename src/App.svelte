@@ -1,13 +1,16 @@
+<!-- App.svelte -->
 <script>
-  import { currentArtist } from "./store/auth";
+  import { Route, Router } from "svelte-navigator";
   import Auth from "./pages/Auth.svelte";
   import Home from "./pages/Home.svelte";
+  import PrivateRoute from "./routes/PrivateRoute.svelte";
+
+  export let url = "";
 </script>
 
-<main>
-  {#if $currentArtist != null}
+<Router {url}>
+  <PrivateRoute path="/">
     <Home />
-  {:else}
-    <Auth />
-  {/if}
-</main>
+  </PrivateRoute>
+  <Route path="/login" component={Auth} />
+</Router>

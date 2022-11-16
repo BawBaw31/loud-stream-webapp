@@ -4,7 +4,7 @@
 
   const logout = () => {
     $currentArtist = null;
-  };  
+  };
 </script>
 
 <div class="page">
