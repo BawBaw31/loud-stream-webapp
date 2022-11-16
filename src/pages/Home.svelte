@@ -1,86 +1,50 @@
-<script>
-  import LoginForm from "../lib/LoginForm.svelte";
-  import RegisterForm from "../lib/RegisterForm.svelte";
+<script lang="ts">
   import CustomButton from "../lib/CustomButton.svelte";
+  import { currentArtist } from "../store/auth";
 
-  let login = true;
-
-  const toggleLogin = () => {
-    login = !login;
-  };
+  const logout = () => {
+    $currentArtist = null;
+  };  
 </script>
 
-<div class="pageContainer">
-  <div class="leftContainer" />
-  <div class="rightContainer">
-    <h1>Welcome to Loud-Stream webapp</h1>
-
-    <div class="card">
-      <div class="card-header-container">
-        <h2>{login ? "Login" : "Register"}</h2>
-        <CustomButton
-          on:click={toggleLogin}
-          btnStyle="secondary"
-          btnType="submit"
-          btnSize="small"
-          text={login ? "Register" : "Login"}
-        />
-      </div>
-      {#if login}
-        <LoginForm />
-      {:else}
-        <RegisterForm />
-      {/if}
-    </div>
-  </div>
+<div class="page">
+  <header>
+    <img
+      id="logo"
+      src="/logo_loud_stream_transparent.png"
+      alt="Loud Stream logo"
+    />
+    <h1>Hello {$currentArtist.stage_name}</h1>
+    <CustomButton
+      on:click={logout}
+      btnStyle="secondary"
+      btnType="submit"
+      btnSize="small"
+      text="Logout"
+    />
+  </header>
 </div>
 
 <style>
-  .pageContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-  }
-
-  .rightContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 2rem;
-  }
-
-  .leftContainer {
-    background-color: var(--primary);
-    min-height: 100%;
+  div.page {
     height: 100vh;
   }
 
-  .card-header-container {
+  header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 0.5rem 1.5rem;
+    background-color: var(--primary);
   }
 
-  h1 {
-    text-align: left;
+  header h1 {
+    margin: 0;
+    font-size: 1.5rem;
   }
 
-  h2 {
-    margin-right: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    .leftContainer {
-      display: none;
-    }
-    .rightContainer {
-      align-items: center;
-      max-width: 30rem;
-    }
-
-    .pageContainer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  img#logo {
+    width: 3.5rem;
+    height: 3.5rem;
   }
 </style>

@@ -13,6 +13,6 @@ export const currentArtist: Writable<Artist> = writable(
 );
 
 currentArtist.subscribe((value) => {
-  if (value) localStorage.setItem("user", JSON.stringify(value));
+  if (value) localStorage.setItem("artist", JSON.stringify(value));  
   else localStorage.removeItem("user"); // for logout
 });
