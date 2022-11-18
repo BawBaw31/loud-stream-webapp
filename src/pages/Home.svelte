@@ -1,5 +1,6 @@
 <script lang="ts">
   import CustomButton from "../lib/CustomButton.svelte";
+  import LatestReleases from "../lib/LatestReleases.svelte";
   import { currentArtist } from "../store/auth";
 
   const logout = () => {
@@ -23,11 +24,19 @@
       text="Logout"
     />
   </header>
+  <main>
+    <h2>Latest Releases</h2>
+    <LatestReleases />
+  </main>
 </div>
 
 <style>
   div.page {
     height: 100vh;
+  }
+
+  main {
+    padding: 0 10%;
   }
 
   header {

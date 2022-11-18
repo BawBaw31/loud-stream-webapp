@@ -1,6 +1,6 @@
 import { writable, type Writable } from "svelte/store";
 
-interface Artist {
+export interface Artist {
   stage_name: string;
   email: string;
   token: string;

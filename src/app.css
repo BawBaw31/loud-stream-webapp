@@ -52,20 +52,6 @@ h1 {
   line-height: 1.1;
 }
 
-.card {
-  /* padding: 2em; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.card-footer {
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
 /* #app {
   text-align: center;
 } */
