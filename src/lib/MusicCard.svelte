@@ -1,11 +1,12 @@
 <script type="ts">
-  import type { Music } from "../store/music";
+  import { playingMusic, type Music } from "../store/music";
 
   export let music: Music;
 </script>
 
 <div class="card">
   <img
+    on:click={() => playingMusic.set(music)}
     src={import.meta.env.VITE_STORAGE_URL + music.coverFileName}
     alt={music.title + "'s cover"}
   />
@@ -27,6 +28,7 @@
     object-fit: cover;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
   }
 
   div.card h2 {

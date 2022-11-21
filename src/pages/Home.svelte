@@ -1,6 +1,7 @@
 <script lang="ts">
   import CustomButton from "../lib/CustomButton.svelte";
   import LatestReleases from "../lib/LatestReleases.svelte";
+  import MusicPlayer from "../lib/MusicPlayer.svelte";
   import { currentArtist } from "../store/auth";
 
   const logout = () => {
@@ -27,6 +28,7 @@
   <main>
     <h2>Latest Releases</h2>
     <LatestReleases />
+    <MusicPlayer />
   </main>
 </div>
 

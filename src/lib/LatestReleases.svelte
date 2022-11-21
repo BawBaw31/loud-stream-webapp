@@ -25,8 +25,9 @@
     data.forEach((music: any) => {
       latestReleases.update((value) => [...value, mapMusic(music)]);
     });
-    console.log($latestReleases);
   });
+
+
 </script>
 
 <Splide
