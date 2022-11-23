@@ -12,5 +12,7 @@
   <PrivateRoute path="/">
     <Home />
   </PrivateRoute>
-  <Route path="/login" component={Auth} />
+  <Route path="/login">
+    <Auth />
+  </Route>
 </Router>

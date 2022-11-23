@@ -11,7 +11,13 @@
 </script>
 
 <div class="pageContainer">
-  <div class="leftContainer" />
+  <div class="leftContainer">
+    <img
+      id="logo"
+      src="/logo_loud_stream_transparent.png"
+      alt="Loud Stream logo"
+    />
+  </div>
   <div class="rightContainer">
     <h1>Welcome to Loud-Stream webapp</h1>
 
@@ -53,6 +59,14 @@
     background-color: var(--primary);
     min-height: 100%;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .leftContainer img#logo {
+    width: 20rem;
+    height: 20rem;
   }
 
   .card-header-container {
