@@ -4,8 +4,8 @@
     playingMusic,
     playingMusicAudioElement,
     type Music,
-  } from "../store/music";
-  import CustomButton from "./CustomButton.svelte";
+  } from "../../store/music";
+  import Controls from "./Controls.svelte";
 
   let isPlaying: boolean = false;
 
@@ -51,12 +51,11 @@
           <p>{$playingMusic.owner.stage_name}</p>
         </div>
       </div>
-      <CustomButton
-        btnStyle="secondary"
-        btnType="button"
-        btnSize="small"
-        text={isPlaying ? "Pause" : "Play"}
-        on:click={playPauseMusic}
+      <Controls
+        {isPlaying}
+        on:playpause={playPauseMusic}
+        on:next={() => console.log("next music")}
+        on:prev={() => console.log("prev music")}
       />
     </div>
   </footer>
@@ -67,15 +66,16 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     background-color: var(--primary);
+    box-shadow: 0 -2px 8px rgba(94, 106, 109, 0.5);
+    padding: 1rem 10%;
   }
 
   div.audio-player {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
   }
 
   div.audio-player-infos {
@@ -96,7 +96,6 @@
     margin-right: 1rem;
   }
 
-  /* audio-player-infos-text first child must have bigger font */
   div.audio-player-infos-text p:first-child {
     font-size: 1.2rem;
   }

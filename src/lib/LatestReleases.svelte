@@ -34,7 +34,6 @@
   options={{
     perPage: 3,
     rewind: true,
-    width: 800,
     gap: "0",
   }}
   aria-label="Latest releases carousel"

@@ -1,7 +1,7 @@
 <script lang="ts">
   import CustomButton from "../lib/CustomButton.svelte";
   import LatestReleases from "../lib/LatestReleases.svelte";
-  import MusicPlayer from "../lib/MusicPlayer.svelte";
+  import MusicPlayer from "../lib/MusicPlayer/MusicPlayer.svelte";
   import { currentArtist } from "../store/auth";
 
   const logout = () => {
@@ -28,8 +28,8 @@
   <main>
     <h2>Latest Releases</h2>
     <LatestReleases />
-    <MusicPlayer />
   </main>
+  <MusicPlayer />
 </div>
 
 <style>
@@ -45,8 +45,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 10%;
     background-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(94, 106, 109, 0.5);
   }
 
   header h1 {
