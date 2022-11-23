@@ -32,6 +32,7 @@
         isPlaying = false;
       } else {
         $playingMusicAudioElement.play();
+        $playingMusicAudioElement.muted = true;
         isPlaying = true;
       }
     }
@@ -70,6 +71,9 @@
     background-color: var(--primary);
     box-shadow: 0 -2px 8px rgba(94, 106, 109, 0.5);
     padding: 1rem 10%;
+    border-radius: 1rem 1rem 1rem 1rem;
+    animation-duration: 0.5s;
+    animation-name: slidein;
   }
 
   div.audio-player {
@@ -105,4 +109,16 @@
     line-height: 1rem;
     color: rgb(215, 207, 207);
   }
+
+  @keyframes slidein {
+  from {
+    left: -100%;
+    right: 100%;
+  }
+
+  to {
+    left: 0;
+    right: 0;
+  }
+}
 </style>
