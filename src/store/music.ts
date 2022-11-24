@@ -9,6 +9,8 @@ export interface Music {
   audioFileName: string;
   coverFileName: string;
   genre: string;
+  published: boolean;
+  published_date: Date;
 }
 
 interface Owner {
@@ -31,9 +33,12 @@ export const mapMusic = (music: any): Music => {
     audioFileName: music.audio_file_name,
     coverFileName: music.cover_file_name,
     genre: music.genre,
+    published: music.published,
+    published_date: new Date(music.published_date),
   };
 };
 
 export const latestReleases: Writable<Music[]> = writable([]);
 export const playingMusic: Writable<Music> = writable(null);
-export const playingMusicAudioElement: Writable<HTMLAudioElement> = writable(null);
+export const playingMusicAudioElement: Writable<HTMLAudioElement> =
+  writable(null);

@@ -8,7 +8,7 @@
 
   onMount(async () => {
     $latestReleases = [];
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/musics`, {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/musics/latest`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${$currentArtist.token}`,

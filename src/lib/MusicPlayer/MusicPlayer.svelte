@@ -13,25 +13,26 @@
     if (value) {
       try {
         if (isPlaying) {
-          playPauseMusic();
+          await playPauseMusic();
         }
         await playingMusicAudioElement.set(
           new Audio(`${import.meta.env.VITE_API_URL}/musics/${value.id}`)
         );
-        playPauseMusic();
+        await playPauseMusic();
       } catch (error) {
         console.error(error);
       }
     }
   });
 
-  const playPauseMusic = () => {
+  const playPauseMusic = async () => {
     if ($playingMusicAudioElement) {
       if (isPlaying) {
         $playingMusicAudioElement.pause();
         isPlaying = false;
       } else {
-        $playingMusicAudioElement.play();
+        await $playingMusicAudioElement.play();
+        // TODO: Music is muted for dev purposes only, unmute it when deploying
         $playingMusicAudioElement.muted = true;
         isPlaying = true;
       }
@@ -65,13 +66,14 @@
 <style>
   footer {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: 0.4rem;
+    left: 0.2rem;
+    right: 0.2rem;
     background-color: var(--primary);
-    box-shadow: 0 -2px 8px rgba(94, 106, 109, 0.5);
+    box-shadow: 2px -2px 8px rgba(94, 106, 109, 0.5);
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
     padding: 1rem 10%;
-    border-radius: 1rem 1rem 1rem 1rem;
+    border-radius: 1rem;
     animation-duration: 0.5s;
     animation-name: slidein;
   }
@@ -111,14 +113,24 @@
   }
 
   @keyframes slidein {
-  from {
-    left: -100%;
-    right: 100%;
+    0% {
+      left: -100%;
+      right: 100%;
+    }
+
+    /* 65% {
+    left: 4%;
+    right: -4%;
   }
 
-  to {
-    left: 0;
-    right: 0;
+  80% {
+    left: -4%;
+    right: 4%;
+  } */
+
+    100% {
+      left: 0.2rem;
+      right: 0.2rem;
+    }
   }
-}
 </style>
