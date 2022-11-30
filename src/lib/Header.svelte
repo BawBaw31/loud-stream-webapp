@@ -12,22 +12,24 @@
 </script>
 
 <header>
-  <img
-    id="logo"
-    src="/logo_loud_stream_transparent.png"
-    alt="Loud Stream logo"
-  />
+  <a href="/">
+    <img
+      id="logo"
+      src="/logo_loud_stream_transparent.png"
+      alt="Loud Stream logo"
+    />
+  </a>
   <h1>Hello {$currentArtist.stage_name}</h1>
   <div class="dropdown-container">
     <button on:click={toggleDropdown}
       ><img src="/src/assets/icons/account-cog.svg" alt="Account" /></button
     >
-    <div class="dropdown-content hidden">
+    <nav class="dropdown-content hidden">
       <a href="/profile">Profile</a>
       <a href="/upload">Upload</a>
       <a href="/settings">Settings</a>
       <button on:click={logout}>Logout</button>
-    </div>
+    </nav>
   </div>
 </header>
 
@@ -39,6 +41,10 @@
     padding: 0.5rem 10%;
     background-color: var(--primary);
     box-shadow: 0 2px 8px rgba(94, 106, 109, 0.5);
+  }
+
+  header a {
+    height: 56px;
   }
 
   header h1 {
@@ -71,7 +77,7 @@
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  div.dropdown-content {
+  nav.dropdown-content {
     position: relative;
     top: 1.25rem;
     right: 2.75rem;
@@ -82,7 +88,8 @@
     border-radius: 0.5rem;
   }
 
-  div.dropdown-content a, div.dropdown-content button {
+  nav.dropdown-content a,
+  nav.dropdown-content button {
     display: block;
     text-decoration: none;
     font-size: 1rem;
@@ -90,13 +97,15 @@
     border-radius: 5px;
     text-align: center;
     padding: 0.75rem 1rem;
+    height: 1.5rem;
   }
 
-  div.dropdown-content a:hover, div.dropdown-content button:hover {
+  nav.dropdown-content a:hover,
+  nav.dropdown-content button:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
 
-  div.dropdown-content button {
+  nav.dropdown-content button {
     width: 100%;
     height: max-content;
   }

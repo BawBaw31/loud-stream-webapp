@@ -33,7 +33,7 @@
       } else {
         await $playingMusicAudioElement.play();
         // TODO: Music is muted for dev purposes only, unmute it when deploying
-        $playingMusicAudioElement.muted = true;
+        // $playingMusicAudioElement.muted = true;
         isPlaying = true;
       }
     }
