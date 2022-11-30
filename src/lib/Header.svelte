@@ -1,6 +1,10 @@
 <script lang="ts">
-  import CustomButton from "./CustomButton.svelte";
   import { currentArtist } from "../store/auth";
+
+  const toggleDropdown = () => {
+    const dropdown = document.querySelector(".dropdown-content");
+    dropdown.classList.toggle("hidden");
+  };
 
   const logout = () => {
     $currentArtist = null;
@@ -14,13 +18,17 @@
     alt="Loud Stream logo"
   />
   <h1>Hello {$currentArtist.stage_name}</h1>
-  <CustomButton
-    on:click={logout}
-    btnStyle="secondary"
-    btnType="submit"
-    btnSize="small"
-    text="Logout"
-  />
+  <div class="dropdown-container">
+    <button on:click={toggleDropdown}
+      ><img src="/src/assets/icons/account-cog.svg" alt="Account" /></button
+    >
+    <div class="dropdown-content hidden">
+      <a href="/profile">Profile</a>
+      <a href="/upload">Upload</a>
+      <a href="/settings">Settings</a>
+      <button on:click={logout}>Logout</button>
+    </div>
+  </div>
 </header>
 
 <style>
@@ -41,5 +49,59 @@
   img#logo {
     width: 3.5rem;
     height: 3.5rem;
+  }
+
+  div.dropdown-container {
+    position: relative;
+    max-height: 2.5rem;
+    max-width: 2.5rem;
+    align-items: flex-end;
+  }
+
+  div.dropdown-container button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    height: 2.5rem;
+    border-radius: 50px;
+  }
+
+  div.dropdown-container button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  div.dropdown-content {
+    position: relative;
+    top: 1.25rem;
+    right: 2.75rem;
+    width: 8rem;
+    z-index: 2;
+    background-color: var(--primary);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+  }
+
+  div.dropdown-content a, div.dropdown-content button {
+    display: block;
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--text);
+    border-radius: 5px;
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+
+  div.dropdown-content a:hover, div.dropdown-content button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  div.dropdown-content button {
+    width: 100%;
+    height: max-content;
+  }
+
+  .hidden {
+    display: none;
   }
 </style>

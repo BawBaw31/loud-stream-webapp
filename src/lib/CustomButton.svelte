@@ -1,5 +1,4 @@
 <script>
-  export let text;
   export let btnType = "";
   export let btnStyle = "primary";
   export let btnSize = "";
@@ -9,11 +8,11 @@
 
 {#if btnIsDisabled}
   <button {ref} class="{btnStyle} {btnSize}" type={btnType} disabled on:click>
-    {text}
+    <slot></slot>
   </button>
 {:else}
   <button {ref} class="{btnStyle} {btnSize}" type={btnType} on:click>
-    {text}
+    <slot></slot>
   </button>
 {/if}
 

@@ -86,11 +86,9 @@
     <small>{$errors.confirmPassword}</small>
   {/if}
 
-  <CustomButton
-    btnType="submit"
-    text={$isSubmitting ? "Loading..." : "Submit"}
-    btnIsDisabled={!$isValid}
-  />
+  <CustomButton btnType="submit" btnIsDisabled={!$isValid}
+    >{$isSubmitting ? "Loading..." : "Submit"}</CustomButton
+  >
 </form>
 
 <style>

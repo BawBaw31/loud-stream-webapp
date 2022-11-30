@@ -70,16 +70,9 @@
     <small>{$errors.password}</small>
   {/if}
 
-  <CustomButton
-    btnType="submit"
-    text={$isSubmitting ? "Loading..." : "Submit"}
-    btnIsDisabled={!$isValid}
-  />
-
-  <CustomButton
-    text="artist"
-    on:click={() => currentArtist.subscribe((value) => console.log(value))}
-  />
+  <CustomButton btnType="submit" btnIsDisabled={!$isValid}
+    >{$isSubmitting ? "Loading..." : "Submit"}</CustomButton
+  >
 </form>
 
 <style>

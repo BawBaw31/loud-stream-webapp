@@ -71,7 +71,6 @@
     right: 0.2rem;
     background-color: var(--primary);
     box-shadow: 2px -2px 8px rgba(94, 106, 109, 0.5);
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
     padding: 1rem 10%;
     border-radius: 1rem;
     animation-duration: 0.5s;

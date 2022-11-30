@@ -28,9 +28,8 @@
           on:click={toggleLogin}
           btnStyle="secondary"
           btnType="submit"
-          btnSize="small"
-          text={login ? "Register" : "Login"}
-        />
+          btnSize="small">{login ? "Register" : "Login"}</CustomButton
+        >
       </div>
       {#if login}
         <LoginForm />
