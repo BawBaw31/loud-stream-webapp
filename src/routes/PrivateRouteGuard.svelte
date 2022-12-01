@@ -16,15 +16,5 @@
 </script>
 
 {#if $currentArtist}
-  <div class="page">
-    <Header />
-    <slot />
-    <MusicPlayer />
-  </div>
+  <slot />
 {/if}
-
-<style>
-  div.page {
-    height: 100vh;
-  }
-</style>

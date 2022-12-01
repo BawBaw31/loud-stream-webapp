@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Link } from "svelte-navigator";
   import { currentArtist } from "../store/auth";
 
   const toggleDropdown = () => {
@@ -12,22 +13,22 @@
 </script>
 
 <header>
-  <a href="/">
+  <Link to="/">
     <img
       id="logo"
       src="/logo_loud_stream_transparent.png"
       alt="Loud Stream logo"
     />
-  </a>
+  </Link>
   <h1>Hello {$currentArtist.stage_name}</h1>
   <div class="dropdown-container">
     <button on:click={toggleDropdown}
       ><img src="/src/assets/icons/account-cog.svg" alt="Account" /></button
     >
     <nav class="dropdown-content hidden">
-      <a href="/profile">Profile</a>
-      <a href="/upload">Upload</a>
-      <a href="/settings">Settings</a>
+      <Link to="/profile">Profile</Link>
+      <Link to="/uploLinkd">Upload</Link>
+      <Link to="/settings">Settings</Link>
       <button on:click={logout}>Logout</button>
     </nav>
   </div>
@@ -43,7 +44,7 @@
     box-shadow: 0 2px 8px rgba(94, 106, 109, 0.5);
   }
 
-  header a {
+  header :global(a) {
     height: 56px;
   }
 
@@ -88,7 +89,7 @@
     border-radius: 0.5rem;
   }
 
-  nav.dropdown-content a,
+  nav.dropdown-content :global(a),
   nav.dropdown-content button {
     display: block;
     text-decoration: none;
@@ -100,7 +101,7 @@
     height: 1.5rem;
   }
 
-  nav.dropdown-content a:hover,
+  nav.dropdown-content :global(a):hover,
   nav.dropdown-content button:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
