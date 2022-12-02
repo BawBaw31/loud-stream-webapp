@@ -3,11 +3,10 @@
   import {
     playingMusic,
     playingMusicAudioElement,
+    isPlaying,
     type Music,
   } from "../../store/music";
   import Controls from "./Controls.svelte";
-
-  let isPlaying: boolean = false;
 
   subscribe(playingMusic, async (value: Music) => {
     if (value) {
@@ -27,14 +26,14 @@
 
   const playPauseMusic = async () => {
     if ($playingMusicAudioElement) {
-      if (isPlaying) {
+      if ($isPlaying) {
         $playingMusicAudioElement.pause();
-        isPlaying = false;
+        $isPlaying = false;
       } else {
         await $playingMusicAudioElement.play();
         // TODO: Music is muted for dev purposes only, unmute it when deploying
         // $playingMusicAudioElement.muted = true;
-        isPlaying = true;
+        $isPlaying = true;
       }
     }
   };
@@ -54,7 +53,6 @@
         </div>
       </div>
       <Controls
-        {isPlaying}
         on:playpause={playPauseMusic}
         on:next={() => console.log("next music")}
         on:prev={() => console.log("prev music")}

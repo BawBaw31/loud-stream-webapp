@@ -42,3 +42,4 @@ export const latestReleases: Writable<Music[]> = writable([]);
 export const playingMusic: Writable<Music> = writable(null);
 export const playingMusicAudioElement: Writable<HTMLAudioElement> =
   writable(null);
+export const isPlaying: Writable<boolean> = writable(false);

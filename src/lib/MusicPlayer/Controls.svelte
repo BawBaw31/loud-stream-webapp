@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { isPlaying } from "../../store/music";
 
-  export let isPlaying;
   const dispatch = createEventDispatcher();
   let actualPlaylist = [];
 </script>
@@ -12,7 +12,7 @@
   </button>
 
   <button on:click={() => dispatch("playpause")} id="play-pause-btn">
-    {#if isPlaying}
+    {#if $isPlaying}
       <img src="/src/assets/icons/pause.svg" alt="Pause" />
     {:else}
       <img src="/src/assets/icons/play.svg" alt="Play" />
@@ -40,7 +40,8 @@
   }
 
   button#play-pause-btn {
-    height: 64px;
+    height: 4rem;
+    width: 4rem;
     margin: 0 1rem;
   }
 

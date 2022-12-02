@@ -1,7 +1,6 @@
 <script type="ts">
-  import { Splide, SplideSlide } from "@splidejs/svelte-splide";
-  import "@splidejs/svelte-splide/css";
   import { onMount } from "svelte";
+  import { Link } from "svelte-navigator";
   import { currentArtist } from "../store/auth";
   import { latestReleases, mapMusic } from "../store/music";
   import MusicCard from "./MusicCard.svelte";
@@ -26,21 +25,49 @@
       latestReleases.update((value) => [...value, mapMusic(music)]);
     });
   });
-
-
 </script>
 
-<Splide
-  options={{
-    perPage: 3,
-    rewind: true,
-    gap: "0",
-  }}
-  aria-label="Latest releases carousel"
->
-  {#each $latestReleases as music}
-    <SplideSlide>
+<section>
+  <div class="section-header">
+    <h2>Latest Releases</h2>
+    <Link to="/">See More</Link>
+  </div>
+  <div class="section-content">
+    {#each $latestReleases as music}
       <MusicCard {music} />
-    </SplideSlide>
-  {/each}
-</Splide>
+    {/each}
+  </div>
+</section>
+
+<style>
+  section {
+    display: grid;
+    grid-gap: 1rem;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 {
+    margin: 0;
+  }
+
+  .section-header :global(a) {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
+
+  .section-header :global(a):hover {
+    text-decoration: underline;
+  }
+
+  .section-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-gap: 1rem;
+  }
+</style>
