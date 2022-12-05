@@ -1,7 +1,5 @@
 <script>
   import { useLocation, useNavigate } from "svelte-navigator";
-  import Header from "../lib/Header.svelte";
-  import MusicPlayer from "../lib/MusicPlayer/MusicPlayer.svelte";
   import { currentArtist } from "../store/auth";
 
   const navigate = useNavigate();

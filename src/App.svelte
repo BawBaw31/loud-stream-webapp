@@ -7,26 +7,31 @@
   import Home from "./pages/Home.svelte";
   import Profile from "./pages/Profile.svelte";
   import PrivateRoute from "./routes/PrivateRoute.svelte";
+  import { currentArtist } from "./store/auth";
 
   export let url = "";
 </script>
 
-<div class="page">
-  <Router {url}>
-    <Header />
-    <PrivateRoute path="/">
-      <Home />
-    </PrivateRoute>
-    <PrivateRoute path="/profile">
-      <Profile />
-    </PrivateRoute>
+<Router {url}>
+  {#if $currentArtist}
+    <div class="page">
+      <Header />
+      <Router url="/test">
+        <PrivateRoute path="/">
+          <Home />
+        </PrivateRoute>
+        <PrivateRoute path="/profile">
+          <Profile />
+        </PrivateRoute>
+      </Router>
+      <MusicPlayer />
+    </div>
+  {:else}
     <Route path="/login">
       <Auth />
     </Route>
-  </Router>
-
-  <MusicPlayer />
-</div>
+  {/if}
+</Router>
 
 <style>
   div.page {
