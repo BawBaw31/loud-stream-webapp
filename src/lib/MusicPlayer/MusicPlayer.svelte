@@ -73,7 +73,7 @@
 
 <style>
   footer {
-    position: absolute;
+    position: fixed;
     bottom: 0.4rem;
     left: 0.2rem;
     right: 0.2rem;

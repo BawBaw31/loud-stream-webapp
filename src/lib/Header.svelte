@@ -2,6 +2,7 @@
   import { Link } from "svelte-navigator";
   import { currentArtist } from "../store/auth";
 
+  let header: HTMLElement;
   let dropdown: HTMLElement;
   let dropdownButton: HTMLElement;
 
@@ -18,14 +19,22 @@
     }
   };
 
+  const onScroll = () => {
+    if (window.scrollY > 5) {
+      header.classList.remove("not-scrolled");
+    } else {
+      header.classList.add("not-scrolled");
+    }
+  };
+
   const logout = () => {
     $currentArtist = null;
   };
 </script>
 
-<svelte:window on:click={onWindowClick} />
+<svelte:window on:click={onWindowClick} on:scroll={onScroll} />
 
-<header>
+<header class="not-scrolled" bind:this={header}>
   <Link to="/">
     <img
       id="logo"
@@ -49,12 +58,42 @@
 
 <style>
   header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem 10%;
-    background-color: var(--primary);
+    z-index: 2;
+    transition: all 0.7s ease-in-out;
+  }
+
+  .not-scrolled {
     box-shadow: 0 2px 8px rgba(94, 106, 109, 0.5);
+    background-color: var(--primary);
+  }
+
+  .not-scrolled h1,
+  .not-scrolled img#logo {
+    display: block;
+  }
+
+  .not-scrolled .dropdown-container > button {
+    background-color: transparent;
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .not-scrolled .dropdown-container > button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateX(0) scale(1.075);
+  }
+
+  .not-scrolled .dropdown-content {
+    transform: translateX(0);
+    border-radius: 0 0 0.5rem 0.5rem;
   }
 
   header :global(a) {
@@ -62,11 +101,13 @@
   }
 
   header h1 {
+    display: none;
     margin: 0;
     font-size: 1.5rem;
   }
 
   img#logo {
+    display: none;
     width: 3.5rem;
     height: 3.5rem;
   }
@@ -77,17 +118,21 @@
     align-items: flex-end;
   }
 
-  div.dropdown-container button {
-    background-color: transparent;
+  div.dropdown-container > button {
+    background-color: var(--primary);
+    opacity: 0.6;
     border: none;
     cursor: pointer;
     padding: 0.5rem;
     height: 2.5rem;
     border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    transform: translateX(5.5rem);
   }
 
-  div.dropdown-container button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+  div.dropdown-container > button:hover {
+    opacity: 1;
+    transform: translateX(5.5rem) scale(1.075);
   }
 
   nav.dropdown-content {
@@ -98,7 +143,9 @@
     z-index: 2;
     background-color: var(--primary);
     box-shadow: 0 8px -16px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 0 0 0.5rem 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.5s ease-in-out;
+    transform: translateX(5.5rem);
   }
 
   nav.dropdown-content :global(a),
@@ -111,6 +158,8 @@
     text-align: center;
     padding: 0.75rem 1rem;
     height: 1.5rem;
+    background-color: transparent;
+    border: none;
   }
 
   nav.dropdown-content :global(a):hover,

@@ -16,14 +16,16 @@
   {#if $currentArtist}
     <div class="page">
       <Header />
-      <Router url="/test">
-        <PrivateRoute path="/">
-          <Home />
-        </PrivateRoute>
-        <PrivateRoute path="/profile">
-          <Profile />
-        </PrivateRoute>
-      </Router>
+      <main>
+        <Router url="/test">
+          <PrivateRoute path="/">
+            <Home />
+          </PrivateRoute>
+          <PrivateRoute path="/profile">
+            <Profile />
+          </PrivateRoute>
+        </Router>
+      </main>
       <MusicPlayer />
     </div>
   {:else}
@@ -36,5 +38,11 @@
 <style>
   div.page {
     height: 100vh;
+  }
+
+  main {
+    padding: 6.5rem 10% 70rem 10%;
+    display: grid;
+    grid-gap: 2rem;
   }
 </style>
