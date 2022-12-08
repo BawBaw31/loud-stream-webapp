@@ -2,15 +2,28 @@
   import { Link } from "svelte-navigator";
   import { currentArtist } from "../store/auth";
 
+  let dropdown: HTMLElement;
+  let dropdownButton: HTMLElement;
+
   const toggleDropdown = () => {
-    const dropdown = document.querySelector(".dropdown-content");
     dropdown.classList.toggle("hidden");
+  };
+
+  const onWindowClick = (e: MouseEvent) => {
+    if (
+      !dropdownButton.contains(e.target as Node) &&
+      !dropdown.classList.contains("hidden")
+    ) {
+      dropdown.classList.add("hidden");
+    }
   };
 
   const logout = () => {
     $currentArtist = null;
   };
 </script>
+
+<svelte:window on:click={onWindowClick} />
 
 <header>
   <Link to="/">
@@ -22,10 +35,10 @@
   </Link>
   <h1>Hello {$currentArtist.stage_name}</h1>
   <div class="dropdown-container">
-    <button on:click={toggleDropdown}
+    <button on:click={toggleDropdown} bind:this={dropdownButton}
       ><img src="/src/assets/icons/account-cog.svg" alt="Account" /></button
     >
-    <nav class="dropdown-content hidden">
+    <nav class="dropdown-content hidden" bind:this={dropdown}>
       <Link to="/profile">Profile</Link>
       <Link to="/uploLinkd">Upload</Link>
       <Link to="/settings">Settings</Link>
@@ -59,7 +72,6 @@
   }
 
   div.dropdown-container {
-    position: relative;
     max-height: 2.5rem;
     max-width: 2.5rem;
     align-items: flex-end;
@@ -79,14 +91,14 @@
   }
 
   nav.dropdown-content {
-    position: relative;
-    top: 1.25rem;
-    right: 2.75rem;
+    position: absolute;
+    top: 4.5rem;
+    right: 10%;
     width: 8rem;
     z-index: 2;
     background-color: var(--primary);
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 0.5rem;
+    box-shadow: 0 8px -16px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 0.5rem 0.5rem;
   }
 
   nav.dropdown-content :global(a),
