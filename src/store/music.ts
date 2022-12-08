@@ -5,12 +5,13 @@ export interface Music {
   title: string;
   streams: number;
   releaseDate: Date;
+  totalTrackTime: number;
   owner: Owner;
   audioFileName: string;
   coverFileName: string;
   genre: string;
   published: boolean;
-  published_date: Date;
+  publishedDate: Date;
 }
 
 interface Owner {
@@ -25,6 +26,7 @@ export const mapMusic = (music: any): Music => {
     title: music.title,
     streams: music.streams,
     releaseDate: new Date(music.created_date),
+    totalTrackTime: music.total_track_time,
     owner: {
       id: music.owner.id,
       stage_name: music.owner.stage_name,
@@ -34,7 +36,7 @@ export const mapMusic = (music: any): Music => {
     coverFileName: music.cover_file_name,
     genre: music.genre,
     published: music.published,
-    published_date: new Date(music.published_date),
+    publishedDate: new Date(music.published_date),
   };
 };
 

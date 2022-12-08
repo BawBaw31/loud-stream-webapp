@@ -67,7 +67,7 @@
 
   .section-content {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
     grid-gap: 1rem;
   }
 </style>

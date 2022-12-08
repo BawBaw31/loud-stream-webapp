@@ -27,7 +27,7 @@
       <MusicPlayer />
     </div>
   {:else}
-    <Route path="/login">
+    <Route path="/">
       <Auth />
     </Route>
   {/if}

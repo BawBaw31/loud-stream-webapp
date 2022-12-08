@@ -6,7 +6,7 @@
   const location = useLocation();
 
   $: if (!$currentArtist) {
-    navigate("/login", {
+    navigate("/", {
       state: { from: $location.pathname },
       replace: true,
     });

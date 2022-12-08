@@ -1,12 +1,16 @@
 <script type="ts">
-  import { subscribe } from "svelte/internal";
+  import { subscribe, to_number } from "svelte/internal";
   import {
+    isPlaying,
     playingMusic,
     playingMusicAudioElement,
-    isPlaying,
     type Music,
   } from "../../store/music";
   import Controls from "./Controls.svelte";
+  import ProgressBar from "./ProgressBar.svelte";
+
+  let updateTime: () => void;
+  let toggleTimeRunning: () => void;
 
   subscribe(playingMusic, async (value: Music) => {
     if (value) {
@@ -17,6 +21,9 @@
         await playingMusicAudioElement.set(
           new Audio(`${import.meta.env.VITE_API_URL}/musics/${value.id}`)
         );
+        $playingMusicAudioElement.onloadedmetadata = () => {
+          updateTime();
+        };
         await playPauseMusic();
       } catch (error) {
         console.error(error);
@@ -27,12 +34,14 @@
   const playPauseMusic = async () => {
     if ($playingMusicAudioElement) {
       if ($isPlaying) {
+        toggleTimeRunning();
         $playingMusicAudioElement.pause();
         $isPlaying = false;
       } else {
+        toggleTimeRunning();
         await $playingMusicAudioElement.play();
         // TODO: Music is muted for dev purposes only, unmute it when deploying
-        // $playingMusicAudioElement.muted = true;
+        $playingMusicAudioElement.muted = true;
         $isPlaying = true;
       }
     }
@@ -52,6 +61,7 @@
           <p>{$playingMusic.owner.stage_name}</p>
         </div>
       </div>
+      <ProgressBar bind:updateTime bind:toggleTimeRunning />
       <Controls
         on:playpause={playPauseMusic}
         on:next={() => console.log("next music")}
@@ -115,15 +125,15 @@
       right: 100%;
     }
 
-    /* 65% {
-    left: 4%;
-    right: -4%;
-  }
+    65% {
+      left: 2%;
+      right: -2%;
+    }
 
-  80% {
-    left: -4%;
-    right: 4%;
-  } */
+    80% {
+      left: -1%;
+      right: 1%;
+    }
 
     100% {
       left: 0.2rem;
