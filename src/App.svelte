@@ -5,6 +5,7 @@
   import MusicPlayer from "./lib/MusicPlayer/MusicPlayer.svelte";
   import Auth from "./pages/Auth.svelte";
   import Home from "./pages/Home.svelte";
+  import Music from "./pages/Music.svelte";
   import Profile from "./pages/Profile.svelte";
   import PrivateRoute from "./routes/PrivateRoute.svelte";
   import { currentArtist } from "./store/auth";
@@ -22,6 +23,9 @@
         </PrivateRoute>
         <PrivateRoute path="/profile">
           <Profile />
+        </PrivateRoute>
+        <PrivateRoute path="/musics/:id">
+          <Music />
         </PrivateRoute>
       </main>
       <MusicPlayer />

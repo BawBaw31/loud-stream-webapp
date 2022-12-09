@@ -6,7 +6,7 @@
   import MusicCard from "../Cards/MusicCard.svelte";
   import Section from "./Section.svelte";
 
-  const latestReleases: Writable<Music[]> = writable([]);
+  export const latestReleases: Writable<Music[]> = writable([]);
 
   onMount(async () => {
     $latestReleases = [];

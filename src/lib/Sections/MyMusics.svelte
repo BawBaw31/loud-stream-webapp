@@ -6,7 +6,7 @@
   import MusicCard from "../Cards/MusicCard.svelte";
   import Section from "./Section.svelte";
 
-  const myMusics: Writable<Music[]> = writable([]);
+  export const myMusics: Writable<Music[]> = writable([]);
 
   onMount(async () => {
     const res = await fetch(`${import.meta.env.VITE_API_URL}/musics/me`, {

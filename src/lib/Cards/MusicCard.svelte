@@ -28,7 +28,7 @@
 <div
   class="card"
   on:click={() => {
-    navigate("/profile");
+    navigate(`/musics/${music.id}`);
   }}
 >
   <img
