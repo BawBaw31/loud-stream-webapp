@@ -40,7 +40,6 @@ export const mapMusic = (music: any): Music => {
   };
 };
 
-export const latestReleases: Writable<Music[]> = writable([]);
 export const playingMusic: Writable<Music> = writable(null);
 export const playingMusicAudioElement: Writable<HTMLAudioElement> =
   writable(null);

@@ -17,14 +17,12 @@
     <div class="page">
       <Header />
       <main>
-        <Router url="/test">
-          <PrivateRoute path="/">
-            <Home />
-          </PrivateRoute>
-          <PrivateRoute path="/profile">
-            <Profile />
-          </PrivateRoute>
-        </Router>
+        <PrivateRoute path="/">
+          <Home />
+        </PrivateRoute>
+        <PrivateRoute path="/profile">
+          <Profile />
+        </PrivateRoute>
       </main>
       <MusicPlayer />
     </div>
@@ -41,7 +39,7 @@
   }
 
   main {
-    padding: 6.5rem 10% 70rem 10%;
+    padding: 6.5rem 10% 7rem 10%;
     display: grid;
     grid-gap: 2rem;
   }

@@ -1,11 +1,11 @@
-<script type="ts">
+<script lang="ts">
   import { useNavigate } from "svelte-navigator";
   import {
     isPlaying,
     playingMusic,
     playingMusicAudioElement,
     type Music,
-  } from "../store/music";
+  } from "../../store/music";
 
   export let music: Music;
   const navigate = useNavigate();

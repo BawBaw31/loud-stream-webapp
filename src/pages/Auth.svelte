@@ -1,6 +1,6 @@
 <script>
-  import LoginForm from "../lib/LoginForm.svelte";
-  import RegisterForm from "../lib/RegisterForm.svelte";
+  import LoginForm from "../lib/Forms/LoginForm.svelte";
+  import RegisterForm from "../lib/Forms/RegisterForm.svelte";
   import CustomButton from "../lib/CustomButton.svelte";
 
   let login = true;

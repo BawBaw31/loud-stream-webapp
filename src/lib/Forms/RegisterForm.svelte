@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
-  import CustomButton from "./CustomButton.svelte";
+  import CustomButton from "../CustomButton.svelte";
 
   const registerRequest = async (
     email: string,

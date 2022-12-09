@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { Link } from "svelte-navigator";
+  import { Link, useNavigate } from "svelte-navigator";
   import { currentArtist } from "../store/auth";
 
   let header: HTMLElement;
   let dropdown: HTMLElement;
   let dropdownButton: HTMLElement;
+
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     dropdown.classList.toggle("hidden");
@@ -29,6 +31,8 @@
 
   const logout = () => {
     $currentArtist = null;
+    navigate('/');
+    window.location.reload();
   };
 </script>
 
@@ -86,7 +90,8 @@
     transform: translateX(0);
   }
 
-  .not-scrolled .dropdown-container > button:hover {
+  .not-scrolled .dropdown-container > button:hover,
+  .not-scrolled .dropdown-container > button:focus {
     background-color: rgba(255, 255, 255, 0.1);
     transform: translateX(0) scale(1.075);
   }
@@ -130,7 +135,8 @@
     transform: translateX(5.5rem);
   }
 
-  div.dropdown-container > button:hover {
+  div.dropdown-container > button:hover,
+  div.dropdown-container > button:focus {
     opacity: 1;
     transform: translateX(5.5rem) scale(1.075);
   }
@@ -142,10 +148,11 @@
     width: 8rem;
     z-index: 2;
     background-color: var(--primary);
-    box-shadow: 0 8px -16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     border-radius: 0.5rem;
     transition: all 0.5s ease-in-out;
     transform: translateX(5.5rem);
+    overflow: hidden;
   }
 
   nav.dropdown-content :global(a),
@@ -154,12 +161,12 @@
     text-decoration: none;
     font-size: 1rem;
     color: var(--text);
-    border-radius: 5px;
     text-align: center;
     padding: 0.75rem 1rem;
     height: 1.5rem;
     background-color: transparent;
     border: none;
+    cursor: pointer;
   }
 
   nav.dropdown-content :global(a):hover,
