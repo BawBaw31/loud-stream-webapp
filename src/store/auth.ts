@@ -1,5 +1,4 @@
 import { writable, type Writable } from "svelte/store";
-
 export interface Artist {
   stage_name: string;
   email: string;
@@ -13,6 +12,6 @@ export const currentArtist: Writable<Artist> = writable(
 );
 
 currentArtist.subscribe((value) => {
-  if (value) localStorage.setItem("artist", JSON.stringify(value));  
-  else localStorage.removeItem("artist"); // for logout
+  if (value) localStorage.setItem("artist", JSON.stringify(value));
+  else localStorage.removeItem("artist");
 });

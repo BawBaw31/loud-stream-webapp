@@ -6,6 +6,7 @@
   import Auth from "./pages/Auth.svelte";
   import Home from "./pages/Home.svelte";
   import Music from "./pages/Music.svelte";
+  import Redirect from "./pages/Redirect.svelte";
   import Profile from "./pages/Profile.svelte";
   import PrivateRoute from "./routes/PrivateRoute.svelte";
   import { currentArtist } from "./store/auth";
@@ -33,6 +34,9 @@
   {:else}
     <Route path="/">
       <Auth />
+    </Route>
+    <Route path="/*">
+      <Redirect />
     </Route>
   {/if}
 </Router>

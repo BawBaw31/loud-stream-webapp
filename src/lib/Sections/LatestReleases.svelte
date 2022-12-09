@@ -4,6 +4,7 @@
   import { currentArtist } from "../../store/auth";
   import { mapMusic, type Music } from "../../store/music";
   import MusicCard from "../Cards/MusicCard.svelte";
+  import { logout } from "../Header.svelte";
   import Section from "./Section.svelte";
 
   export const latestReleases: Writable<Music[]> = writable([]);
@@ -18,7 +19,7 @@
     });
 
     if (res.status === 401) {
-      $currentArtist = null;
+      logout();
       return;
     }
 

@@ -1,3 +1,13 @@
+<script context="module">
+  // const navigate = useNavigate();
+  export const logout = () => {
+    console.log("logout");
+    currentArtist.set(null);
+    // navigate("/");
+    window.location.reload();
+  };
+</script>
+
 <script lang="ts">
   import { Link, useNavigate } from "svelte-navigator";
   import { currentArtist } from "../store/auth";
@@ -5,8 +15,6 @@
   let header: HTMLElement;
   let dropdown: HTMLElement;
   let dropdownButton: HTMLElement;
-
-  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     dropdown.classList.toggle("hidden");
@@ -27,12 +35,6 @@
     } else {
       header.classList.add("not-scrolled");
     }
-  };
-
-  const logout = () => {
-    $currentArtist = null;
-    navigate('/');
-    window.location.reload();
   };
 </script>
 

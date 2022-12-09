@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { to_number } from "svelte/internal";
   import {
     isPlaying,
     playingMusic,
