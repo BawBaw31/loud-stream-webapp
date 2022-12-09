@@ -8,7 +8,6 @@
     isPlaying,
     mapMusic,
     playingMusic,
-    playingMusicAudioElement,
     type Music,
   } from "../store/music";
 
@@ -36,20 +35,6 @@
     music.set(mapMusic(data));
     loading.set(false);
   });
-
-  const playPauseMusic = async () => {
-    if ($playingMusicAudioElement) {
-      if ($isPlaying) {
-        $playingMusicAudioElement.pause();
-        $isPlaying = false;
-      } else {
-        await $playingMusicAudioElement.play();
-        // TODO: Music is muted for dev purposes only, unmute it when deploying
-        // $playingMusicAudioElement.muted = true;
-        $isPlaying = true;
-      }
-    }
-  };
 </script>
 
 {#if $music}
@@ -68,7 +53,7 @@
   </div>
 
   {#if $playingMusic && $playingMusic.id === $music.id}
-    <button class="playPause" on:click|stopPropagation={playPauseMusic}>
+    <button class="playPause" on:click={() => ($isPlaying = !$isPlaying)}>
       {#if $isPlaying}
         <img src="/src/assets/icons/pause.svg" alt="Pause" />
       {:else}

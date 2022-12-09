@@ -10,22 +10,18 @@
   let progress: number = 0;
   let trackTimer: NodeJS.Timer;
 
-  export const updateTime = () => {
+  const updateTime = () => {
     progress =
       $playingMusicAudioElement.currentTime *
       (100 / $playingMusic.totalTrackTime);
 
-    let currHrs = Math.floor($playingMusicAudioElement.currentTime / 60 / 60);
     let currMins = Math.floor($playingMusicAudioElement.currentTime / 60);
     let currSecs = Math.floor(
       $playingMusicAudioElement.currentTime - currMins * 60
     );
 
-    let durHrs = Math.floor($playingMusic.totalTrackTime / 60 / 60);
     let durMins = Math.floor(($playingMusic.totalTrackTime / 60) % 60);
-    let durSecs = Math.floor(
-      $playingMusic.totalTrackTime - durHrs * 60 * 60 - durMins * 60
-    );
+    let durSecs = Math.floor($playingMusic.totalTrackTime - durMins * 60);
 
     currTimeDisplay = `${currMins < 10 ? "0" : ""}${currMins}:${
       currSecs < 10 ? "0" : ""
@@ -40,10 +36,10 @@
   };
 
   export const toggleTimeRunning = () => {
+    if (trackTimer) clearInterval(trackTimer);
     if ($playingMusicAudioElement.ended) {
       $isPlaying = false;
-      clearInterval(trackTimer);
-    } else {
+    } else if (!$playingMusicAudioElement.paused) {
       trackTimer = setInterval(updateTime, 1000);
     }
   };
@@ -60,9 +56,10 @@
         step="0.1"
         bind:value={progress}
         on:mousedown={() => {
-          clearInterval(trackTimer);
+          if (trackTimer) clearInterval(trackTimer);
         }}
         on:mouseup={() => {
+          if (trackTimer) clearInterval(trackTimer);
           trackTimer = setInterval(updateTime, 1000);
         }}
         on:change={() => {

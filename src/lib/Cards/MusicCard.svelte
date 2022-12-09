@@ -2,27 +2,11 @@
   import { useNavigate } from "svelte-navigator";
   import {
     isPlaying,
-    playingMusic,
-    playingMusicAudioElement,
-    type Music,
+    playingMusic, type Music
   } from "../../store/music";
 
   export let music: Music;
   const navigate = useNavigate();
-
-  const playPauseMusic = async () => {
-    if ($playingMusicAudioElement) {
-      if ($isPlaying) {
-        $playingMusicAudioElement.pause();
-        $isPlaying = false;
-      } else {
-        await $playingMusicAudioElement.play();
-        // TODO: Music is muted for dev purposes only, unmute it when deploying
-        // $playingMusicAudioElement.muted = true;
-        $isPlaying = true;
-      }
-    }
-  };
 </script>
 
 <div
@@ -40,7 +24,7 @@
   <p>{music.releaseDate.toDateString()}</p>
 
   {#if $playingMusic && $playingMusic.id === music.id}
-    <button on:click|stopPropagation={playPauseMusic}>
+    <button on:click|stopPropagation={() => ($isPlaying = !$isPlaying)}>
       {#if $isPlaying}
         <img src="/src/assets/icons/pause.svg" alt="Pause" />
       {:else}

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { subscribe, to_number } from "svelte/internal";
+  import { subscribe } from "svelte/internal";
   import {
     isPlaying,
     playingMusic,
@@ -9,43 +9,39 @@
   import Controls from "./Controls.svelte";
   import ProgressBar from "./ProgressBar.svelte";
 
-  let updateTime: () => void;
   let toggleTimeRunning: () => void;
 
   subscribe(playingMusic, async (value: Music) => {
     if (value) {
       try {
-        if (isPlaying) {
-          await playPauseMusic();
+        if ($isPlaying) {
+          isPlaying.set(false);
         }
         await playingMusicAudioElement.set(
           new Audio(`${import.meta.env.VITE_API_URL}/musics/${value.id}`)
         );
         $playingMusicAudioElement.onloadedmetadata = () => {
-          updateTime();
+          $isPlaying = true;
         };
-        await playPauseMusic();
       } catch (error) {
         console.error(error);
       }
     }
   });
 
-  const playPauseMusic = async () => {
+  subscribe(isPlaying, async (value: boolean) => {
     if ($playingMusicAudioElement) {
-      if ($isPlaying) {
-        toggleTimeRunning();
+      if (!value) {
         $playingMusicAudioElement.pause();
-        $isPlaying = false;
-      } else {
         toggleTimeRunning();
+      } else {
         await $playingMusicAudioElement.play();
         // TODO: Music is muted for dev purposes only, unmute it when deploying
         $playingMusicAudioElement.muted = true;
-        $isPlaying = true;
+        toggleTimeRunning();
       }
     }
-  };
+  });
 </script>
 
 {#if $playingMusicAudioElement}
@@ -61,9 +57,9 @@
           <p>{$playingMusic.owner.stage_name}</p>
         </div>
       </div>
-      <ProgressBar bind:updateTime bind:toggleTimeRunning />
+      <ProgressBar bind:toggleTimeRunning />
       <Controls
-        on:playpause={playPauseMusic}
+        on:playpause={() => ($isPlaying = !$isPlaying)}
         on:next={() => console.log("next music")}
         on:prev={() => console.log("prev music")}
       />
