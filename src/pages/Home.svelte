@@ -1,5 +1,5 @@
 <script lang="ts">
-  import LatestReleases from "../lib/Sections/LatestReleases.svelte";
+  import MusicsSection from "../lib/Sections/MusicsSection.svelte";
 </script>
 
-<LatestReleases />
+<MusicsSection title="Latest releases" url="latest" />

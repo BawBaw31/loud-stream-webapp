@@ -1,9 +1,6 @@
 <script lang="ts">
-  import { useNavigate } from "svelte-navigator";
-  import {
-    isPlaying,
-    playingMusic, type Music
-  } from "../../store/music";
+  import { Link, useNavigate } from "svelte-navigator";
+  import { isPlaying, playingMusic, type Music } from "../../store/music";
 
   export let music: Music;
   const navigate = useNavigate();
@@ -11,7 +8,7 @@
 
 <div
   class="card"
-  on:click={() => {
+  on:click|stopPropagation={() => {
     navigate(`/musics/${music.id}`);
   }}
 >
@@ -20,7 +17,9 @@
     alt={music.title + "'s cover"}
   />
   <h2>{music.title}</h2>
-  <p>By {music.owner.stage_name}</p>
+  <Link to={`/artists/${music.owner.id}`}>
+    {music.owner.stage_name}
+  </Link>
   <p>{music.releaseDate.toDateString()}</p>
 
   {#if $playingMusic && $playingMusic.id === music.id}
@@ -69,6 +68,17 @@
     margin: 0;
     font-size: 0.7rem;
     line-height: 1rem;
+  }
+
+  :global(a) {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+
+  :global(a):hover {
+    text-decoration: underline;
+    color: var(--primary);
   }
 
   div.card button {

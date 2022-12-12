@@ -1,15 +1,13 @@
 <script context="module">
-  // const navigate = useNavigate();
   export const logout = () => {
     console.log("logout");
     currentArtist.set(null);
-    // navigate("/");
     window.location.reload();
   };
 </script>
 
 <script lang="ts">
-  import { Link, useNavigate } from "svelte-navigator";
+  import { Link } from "svelte-navigator";
   import { currentArtist } from "../store/auth";
 
   let header: HTMLElement;
@@ -55,7 +53,7 @@
     >
     <nav class="dropdown-content hidden" bind:this={dropdown}>
       <Link to="/profile">Profile</Link>
-      <Link to="/uploLinkd">Upload</Link>
+      <Link to="/upload">Upload</Link>
       <Link to="/settings">Settings</Link>
       <button on:click={logout}>Logout</button>
     </nav>

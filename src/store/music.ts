@@ -14,7 +14,7 @@ export interface Music {
   publishedDate: Date;
 }
 
-interface Owner {
+export interface Owner {
   id: number;
   stage_name: string;
   email: string;

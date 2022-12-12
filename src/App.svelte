@@ -3,11 +3,13 @@
   import { Route, Router } from "svelte-navigator";
   import Header from "./lib/Header.svelte";
   import MusicPlayer from "./lib/MusicPlayer/MusicPlayer.svelte";
+  import Artist from "./pages/Artist.svelte";
   import Auth from "./pages/Auth.svelte";
   import Home from "./pages/Home.svelte";
   import Music from "./pages/Music.svelte";
-  import Redirect from "./pages/Redirect.svelte";
   import Profile from "./pages/Profile.svelte";
+  import Redirect from "./pages/Redirect.svelte";
+  import Upload from "./pages/Upload.svelte";
   import PrivateRoute from "./routes/PrivateRoute.svelte";
   import { currentArtist } from "./store/auth";
 
@@ -25,8 +27,14 @@
         <PrivateRoute path="/profile">
           <Profile />
         </PrivateRoute>
+        <PrivateRoute path="/upload">
+          <Upload />
+        </PrivateRoute>
         <PrivateRoute path="/musics/:id">
           <Music />
+        </PrivateRoute>
+        <PrivateRoute path="/artists/:id">
+          <Artist />
         </PrivateRoute>
       </main>
       <MusicPlayer />

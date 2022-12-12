@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { useParams } from "svelte-navigator";
+  import { Link, useParams } from "svelte-navigator";
   import { writable, type Writable } from "svelte/store";
   import { logout } from "../lib/Header.svelte";
   import { currentArtist } from "../store/auth";
@@ -46,7 +46,9 @@
     <div class="infos">
       <p>Single</p>
       <h1>{$music.title}</h1>
-      <h2>By {$music.owner.stage_name}</h2>
+      <Link to={`/artists/${$music.owner.id}`}
+        ><h2>{$music.owner.stage_name}</h2></Link
+      >
       <p>Published {$music.publishedDate.toDateString()}</p>
       <p>Genre : {$music.genre}</p>
     </div>
