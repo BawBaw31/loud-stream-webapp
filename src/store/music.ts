@@ -14,6 +14,39 @@ export interface Music {
   publishedDate: Date;
 }
 
+export enum Genre {
+  rock = "Rock",
+  pop = "Pop",
+  rap = "Rap",
+  jazz = "Jazz",
+  blues = "Blues",
+  country = "Country",
+  classical = "Classical",
+  electronic = "Electronic",
+  folk = "Folk",
+  reggae = "Reggae",
+  soul = "Soul",
+  metal = "Metal",
+  punk = "Punk",
+  hip_hop = "Hip Hop",
+  indie = "Indie",
+  alternative = "Alternative",
+  latin = "Latin",
+  world = "World",
+  dance = "Dance",
+  rnb = "R&B",
+  gospel = "Gospel",
+  soundtrack = "Soundtrack",
+  childrens = "Children's",
+  comedy = "Comedy",
+  spoken = "Spoken",
+  holiday = "Holiday",
+  new_age = "New Age",
+  opera = "Opera",
+  reggaeton = "Reggaeton",
+  ska = "Ska",
+}
+
 export interface Owner {
   id: number;
   stage_name: string;
