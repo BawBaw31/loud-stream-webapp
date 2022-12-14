@@ -9,7 +9,7 @@
   import { currentArtist } from "../../store/auth";
   import { mapMusic, type Music, type Owner } from "../../store/music";
   import MusicCard from "../Cards/MusicCard.svelte";
-  import { logout } from "../Header.svelte";
+  import { logout } from "../Layout/Header.svelte";
   import Section from "./Section.svelte";
 
   export const musics: Writable<Music[]> = writable([]);
@@ -22,6 +22,7 @@
 
   export let url: string;
   export let title: string;
+  export let published: boolean = true;
 
   onMount(async () => {
     $musics = [];
@@ -48,7 +49,7 @@
 {#if $musics.length}
   <Section {title} seeMoreLink="/">
     {#each $musics as music}
-      <MusicCard {music} />
+      <MusicCard {music} {published} />
     {/each}
   </Section>
 {/if}

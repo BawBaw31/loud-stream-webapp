@@ -8,7 +8,7 @@
 
 <script lang="ts">
   import { Link } from "svelte-navigator";
-  import { currentArtist } from "../store/auth";
+  import { currentArtist } from "../../store/auth";
 
   let header: HTMLElement;
   let dropdown: HTMLElement;

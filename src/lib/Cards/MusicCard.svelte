@@ -3,13 +3,15 @@
   import { isPlaying, playingMusic, type Music } from "../../store/music";
 
   export let music: Music;
+  export let published: boolean = true;
+
   const navigate = useNavigate();
 </script>
 
 <div
   class="card"
   on:click|stopPropagation={() => {
-    navigate(`/musics/${music.id}`);
+    navigate(`/musics/${!published ? "unpublished/" : ""}${music.id}`);
   }}
 >
   <img
@@ -17,9 +19,13 @@
     alt={music.title + "'s cover"}
   />
   <h2>{music.title}</h2>
-  <Link to={`/artists/${music.owner.id}`}>
-    {music.owner.stage_name}
-  </Link>
+  {#if !published}
+    <p class="unpublished">Unpublished</p>
+  {:else}
+    <Link to={`/artists/${music.owner.id}`}>
+      {music.owner.stage_name}
+    </Link>
+  {/if}
   <p>{music.releaseDate.toDateString()}</p>
 
   {#if $playingMusic && $playingMusic.id === music.id}
@@ -68,6 +74,13 @@
     margin: 0;
     font-size: 0.7rem;
     line-height: 1rem;
+  }
+
+  div.card p.unpublished {
+    color: var(--primary);
+    font-style: italic;
+    font-size: 0.8rem;
+    line-height: 1.5rem;
   }
 
   :global(a) {

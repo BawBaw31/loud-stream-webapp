@@ -4,5 +4,5 @@
 </script>
 
 <h1>{$currentArtist.stage_name}</h1>
-<MusicsSection title="My Music" url="me" />
-
+<MusicsSection title="My Music" url="me/true" />
+<MusicsSection title="My Unpublished Music" url="me/false" published={false} />

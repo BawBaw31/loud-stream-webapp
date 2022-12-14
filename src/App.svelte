@@ -1,7 +1,7 @@
 <!-- App.svelte -->
 <script>
   import { Route, Router } from "svelte-navigator";
-  import Header from "./lib/Header.svelte";
+  import Header from "./lib/Layout/Header.svelte";
   import MusicPlayer from "./lib/MusicPlayer/MusicPlayer.svelte";
   import Artist from "./pages/Artist.svelte";
   import Auth from "./pages/Auth.svelte";
@@ -32,6 +32,9 @@
         </PrivateRoute>
         <PrivateRoute path="/musics/:id">
           <Music />
+        </PrivateRoute>
+        <PrivateRoute path="/musics/unpublished/:id">
+          <Music published={false} />
         </PrivateRoute>
         <PrivateRoute path="/artists/:id">
           <Artist />

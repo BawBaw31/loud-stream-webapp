@@ -1,9 +1,12 @@
 <script lang="ts">
   import { createForm } from "svelte-forms-lib";
+  import { useNavigate } from "svelte-navigator";
   import * as yup from "yup";
   import CustomButton from "../lib/CustomButton.svelte";
   import { currentArtist } from "../store/auth";
   import { Genre } from "../store/music";
+
+  const navigate = useNavigate();
 
   const uploadMusicRequest = async (
     audioFile: File,
@@ -93,6 +96,7 @@
       );
       const data = await response.json();
       console.log("data :", data);
+      navigate(`/musics/unpublished/${data.id}`);
     },
   });
 </script>
