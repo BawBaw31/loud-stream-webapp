@@ -1,25 +1,34 @@
 <script lang="ts">
   import { createForm } from "svelte-forms-lib";
+  import { writable, type Writable } from "svelte/store";
   import * as yup from "yup";
   import CustomButton from "../CustomButton.svelte";
+
+  const apiError: Writable<string | null> = writable(null);
+  const apiSuccess: Writable<string | null> = writable(null);
 
   const registerRequest = async (
     email: string,
     stage_name: string,
     password: string
   ): Promise<Response> => {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        stage_name: stage_name,
-        password: password,
-      }),
-    });
-    return response;
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          stage_name: stage_name,
+          password: password,
+        }),
+      });
+      return response;
+    } catch (error) {
+      apiError.set("Register failed.");
+      apiSuccess.set(null);
+    }
   };
 
   const { errors, handleChange, handleSubmit, isValid, isSubmitting, touched } =
@@ -41,19 +50,34 @@
           .oneOf([yup.ref("password")], "passwords must match"),
       }),
       onSubmit: async (values) => {
-        console.log(values);
         const response = await registerRequest(
           values.email,
           values.stageName,
           values.password
         );
-        const data = await response.json();
-        console.log(data);
+        if (response.status !== 200) {
+          apiError.set("Register failed.");
+          apiSuccess.set(null);
+        } else {
+          apiError.set(null);
+          apiSuccess.set("Congratulations!");
+        }
       },
     });
 </script>
 
 <form class:valid={$isValid} on:submit={handleSubmit}>
+  {#if $apiError}
+    <div>
+      <small>{$apiError}</small>
+    </div>
+  {/if}
+  {#if $apiSuccess}
+    <div class="success">
+      <small>{$apiSuccess}</small>
+    </div>
+  {/if}
+
   <div class="input-container">
     <label for="stageName"> Stage name :</label>
     <input type="text" name="stageName" on:keyup={handleChange} />
@@ -94,5 +118,9 @@
 <style>
   small {
     align-self: flex-end;
+  }
+
+  .success small{
+    color: green;
   }
 </style>

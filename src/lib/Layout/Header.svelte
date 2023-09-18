@@ -53,8 +53,8 @@
     >
     <nav class="dropdown-content hidden" bind:this={dropdown}>
       <Link to="/profile">Profile</Link>
+      <Link to="/search">Search</Link>
       <Link to="/upload">Upload</Link>
-      <Link to="/settings">Settings</Link>
       <button on:click={logout}>Logout</button>
     </nav>
   </div>

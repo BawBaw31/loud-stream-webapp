@@ -2,13 +2,15 @@
   import { Link } from "svelte-navigator";
 
   export let title: string;
-  export let seeMoreLink: string;
+  export let seeMoreLink: string | null = null;
 </script>
 
 <section>
   <div class="section-header">
     <h2>{title}</h2>
-    <Link to={seeMoreLink}>See More</Link>
+    {#if seeMoreLink}
+      <Link to={seeMoreLink}>See More</Link>
+    {/if}
   </div>
   <div class="section-content">
     <slot />

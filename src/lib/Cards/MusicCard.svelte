@@ -48,7 +48,7 @@
     position: relative;
     border-radius: 0.5rem;
     padding: 1rem;
-    width: max-content;
+    width: 10rem;
     cursor: pointer;
     background-color: rgba(131, 124, 124, 0.1);
   }

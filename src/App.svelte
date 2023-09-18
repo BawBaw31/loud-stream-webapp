@@ -9,6 +9,7 @@
   import Music from "./pages/Music.svelte";
   import Profile from "./pages/Profile.svelte";
   import Redirect from "./pages/Redirect.svelte";
+  import Search from "./pages/Search.svelte";
   import Upload from "./pages/Upload.svelte";
   import PrivateRoute from "./routes/PrivateRoute.svelte";
   import { currentArtist } from "./store/auth";
@@ -26,6 +27,9 @@
         </PrivateRoute>
         <PrivateRoute path="/profile">
           <Profile />
+        </PrivateRoute>
+        <PrivateRoute path="/search">
+          <Search />
         </PrivateRoute>
         <PrivateRoute path="/upload">
           <Upload />
@@ -58,8 +62,8 @@
   }
 
   main {
-    padding: 6.5rem 10% 7rem 10%;
+    padding: 6.5rem 10% 8rem 10%;
     display: grid;
-    grid-gap: 2rem;
+    grid-gap: 3rem;
   }
 </style>

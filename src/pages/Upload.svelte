@@ -1,12 +1,14 @@
 <script lang="ts">
   import { createForm } from "svelte-forms-lib";
   import { useNavigate } from "svelte-navigator";
+  import { writable, type Writable } from "svelte/store";
   import * as yup from "yup";
   import CustomButton from "../lib/CustomButton.svelte";
   import { currentArtist } from "../store/auth";
   import { Genre } from "../store/music";
 
   const navigate = useNavigate();
+  const apiError: Writable<string | null> = writable(null);
 
   const uploadMusicRequest = async (
     audioFile: File,
@@ -30,7 +32,7 @@
       });
       return response;
     } catch (error) {
-      console.error("Something went wrong :", error);
+      apiError.set("Upload failed.");
     }
   };
 
@@ -94,9 +96,12 @@
         values.title,
         values.genre
       );
-      const data = await response.json();
-      console.log("data :", data);
-      navigate(`/musics/unpublished/${data.id}`);
+      if (response.status !== 201) {
+        apiError.set("Upload failed.")
+      } else {
+        const data = await response.json();
+        navigate(`/musics/unpublished/${data.id}`);
+      }
     },
   });
 </script>
@@ -104,6 +109,12 @@
 <h1>Upload your music</h1>
 
 <form class:valid={$isValid} on:submit={handleSubmit}>
+  {#if $apiError}
+    <div>
+      <small>{$apiError}</small>
+    </div>
+  {/if}
+
   <div class="input-container">
     <label for="title">Title :</label>
     <input type="text" name="title" on:keyup={handleChange} />
