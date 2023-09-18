@@ -53,6 +53,14 @@ export interface Owner {
   email: string;
 }
 
+export const mapArtist = (artist: any): Owner => {
+  return {
+    id: artist.id,
+    stage_name: artist.stage_name,
+    email: artist.email,
+  };
+};
+
 export const mapMusic = (music: any): Music => {
   return {
     id: music.id,
@@ -77,3 +85,5 @@ export const playingMusic: Writable<Music> = writable(null);
 export const playingMusicAudioElement: Writable<HTMLAudioElement> =
   writable(null);
 export const isPlaying: Writable<boolean> = writable(false);
+
+export const searchQuery: Writable<string> = writable("");
